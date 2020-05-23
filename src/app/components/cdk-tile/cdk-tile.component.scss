@@ -18,4 +18,14 @@
     flex-grow: 1;
     background-color: green;
   }
+
+  .drag-handle {
+    position: absolute;
+    top: 27px;
+    right: -297px;
+    color: #ccc;
+    cursor: move;
+    width: 24px;
+    height: 24px;
+  }
 }

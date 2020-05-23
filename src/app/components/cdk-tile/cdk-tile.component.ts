@@ -1,12 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { TileService } from 'src/app/services/tile.service';
 
 @Component({
   selector: 'app-cdk-tile',
   templateUrl: './cdk-tile.component.html',
   styleUrls: ['./cdk-tile.component.scss'],
 })
-export class CdkTileComponent implements OnInit {
-  constructor() {}
+export class CdkTileComponent implements OnInit, AfterViewInit {
+  tileNumber: number;
 
-  ngOnInit(): void {}
+  constructor(private tileService: TileService, private cdRef: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    this.tileNumber = this.tileService.getTileNumber();
+  }
+
+  ngAfterViewInit() {
+    this.cdRef.detectChanges();
+  }
 }

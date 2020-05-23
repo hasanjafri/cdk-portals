@@ -1,3 +1,11 @@
-<div class="cdk-container">
-  <ng-template *ngFor="let tile of tiles" [cdkPortalOutlet]="tilePortal"></ng-template>
+<div *ngIf="showTiles" class="cdk-container" cdkDropListGroup>
+  <div *ngFor="let tile of tiles; let i = index;" cdkDropList [cdkDropListData]="i" cdkDropListOrientation="horizontal">
+    <div cdkDrag [cdkDragData]="i" cdkDragBoundary=".cdk-container" (cdkDragEntered)="enter($event)">
+      <div class="tile-placeholder" *cdkDragPlaceholder></div>
+      <ng-template [cdkPortalOutlet]="tilePortal">
+      </ng-template>
+    </div>
+  </div>
 </div>
+<div class="main-app"> Main App </div>
+<button class="hide-tiles-btn" (click)="toggleTiles()">Toggle Tiles</button>
