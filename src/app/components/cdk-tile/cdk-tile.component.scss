@@ -5,6 +5,7 @@
   flex-direction: column;
   border: 1px solid white;
   margin: 0px 1px;
+  background-color: black;
 
   .header,
   .footer {
@@ -17,15 +18,5 @@
     width: 100%;
     flex-grow: 1;
     background-color: green;
-  }
-
-  .drag-handle {
-    position: absolute;
-    top: 27px;
-    right: -297px;
-    color: #ccc;
-    cursor: move;
-    width: 24px;
-    height: 24px;
   }
 }

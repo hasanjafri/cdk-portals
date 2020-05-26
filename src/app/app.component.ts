@@ -1,7 +1,9 @@
 import { Component, AfterViewInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { CdkTileComponent } from './components/cdk-tile/cdk-tile.component';
 import { moveItemInArray, CdkDragEnter } from '@angular/cdk/drag-drop';
+
+import { CdkTileComponent } from './components/cdk-tile/cdk-tile.component';
+import { defaultHandlePos } from './shared/models/default-handle-pos';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,9 @@ export class AppComponent implements AfterViewInit {
   tilePortal: ComponentPortal<CdkTileComponent>;
 
   tiles: Array<number>;
+  handleConfig = defaultHandlePos;
   showTiles = true;
+  isDragging = false;
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.tiles = Array(20)
@@ -31,7 +35,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   enter(event: CdkDragEnter) {
-    console.log(`from: ${event.item.data}`, `to: ${event.container.data}`, `tiles: ${this.tiles}`);
     if (event.item.data < event.container.data) {
       moveItemInArray(this.tiles, event.item.data, event.container.data - 1);
     } else {

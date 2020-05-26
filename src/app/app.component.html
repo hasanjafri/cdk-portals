@@ -1,11 +1,39 @@
-<div *ngIf="showTiles" class="cdk-container" cdkDropListGroup>
-  <div *ngFor="let tile of tiles; let i = index;" cdkDropList [cdkDropListData]="i" cdkDropListOrientation="horizontal">
-    <div cdkDrag [cdkDragData]="i" cdkDragBoundary=".cdk-container" (cdkDragEntered)="enter($event)">
+<div class="cdk-container" cdkDropListGroup [style.visibility]="showTiles ? 'visible' : 'hidden'">
+  <div *ngFor="let tile of tiles; let i = index" cdkDropList [cdkDropListData]="i" cdkDropListOrientation="horizontal">
+    <div
+      cdkDrag
+      [cdkDragData]="i"
+      cdkDragBoundary=".cdk-container"
+      (cdkDragEntered)="enter($event)"
+      (cdkDragStarted)="isDragging = true"
+      (cdkDragReleased)="isDragging = false"
+      (cdkDragMoved)="isDragging = true"
+    >
       <div class="tile-placeholder" *cdkDragPlaceholder></div>
-      <ng-template [cdkPortalOutlet]="tilePortal">
-      </ng-template>
+      <ng-template [cdkPortalOutlet]="tilePortal"> </ng-template>
+      <div
+        *ngIf="showTiles && !isDragging"
+        class="drag-handle"
+        cdkDragHandle
+        [style.top]="handleConfig[i].top"
+        [style.left]="handleConfig[i].left"
+      >
+        <svg width="24px" fill="white" viewBox="0 0 24 24">
+          <path
+            d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+          ></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+      </div>
     </div>
   </div>
 </div>
-<div class="main-app"> Main App </div>
+<div class="main-app">
+  <div class="home-main-text">
+    <h3>Welcome to Pulse</h3>
+    <p>The one stop solution for your FX needs</p>
+    <button class="btn btn-outline-warning">View price tiles</button>
+    <button class="btn btn-outline-warning">Place an order</button>
+  </div>
+</div>
 <button class="hide-tiles-btn" (click)="toggleTiles()">Toggle Tiles</button>
